@@ -59,6 +59,14 @@
 							<li>Quotients that are not representable (e.g. repeating decimals)</li>
 						</ul>
 					</section>
+					<section>
+						<h2>How to Fix FlOps</h2>
+						<ul>
+							<li>Use trig identities to rewrite additions/subtractions as multiplications</li>
+							<li>Multiply by 1, often using the conjugate over the conjugate.</li>
+							<li>Add zero by adding and subtracting the same quantity.</li>
+						</ul>
+					</section>
 				</section>
 				<section>
 					<section>Convergence, Stability, and Conditioning</section>
@@ -90,7 +98,7 @@
 					<section>
 						<h2>Relative Error</h2>
 						<ul>
-							<li> Intuition: The magnitude is the number of trustworthy digits plus one.
+							<li> Intuition: The opposite of the magnitude is the number of trustworthy digits plus one.
 								\[ \frac{\left|x_n - x \right|}{|x|} \]
 							</li>
 						</ul>
@@ -117,12 +125,13 @@
 					</section>
 					<section>
 						<h2>Convergence Rate: Techniques</h2>
-						<ol>
+						<ul>
 							<li>To prove \(f(x) = O(g(x))\), use the Mean Value Theorem with \(a=0\) and \(b=g(x)\) to write
-								\[ \frac{f(x) - 0}{g(x) - 0} = f'(x)\]
-							Then try to bound \(f'(x)\).
+								\[ \frac{f(x) - f(g(0))}{g(x) - 0} = f'(c)\]
+							Then try to bound \(f'(c)\).
 							</li>
-						</ol>
+							<li>To prove \(f(x) = o(g(x))\), set up the limit, \(\lim_{x \to 0} \frac{f(x)}{g(x)}\) and use L'Hopital's rule.</li>
+						</ul>
 					</section>
 					<section>
 						<h2>Order of Convergence</h2>
@@ -134,18 +143,33 @@
 						</ul>
 					</section>
 					<section>
-						<h2>Condition Number</h2>
+						<h2>Condition Number (1/2)</h2>
 						<ul>
 							<li>Intuition: Problems with a large condition number produce dramatically different answers for a slightly different input.
 							</li>
-							<li>Formally, the condition number for the function \(f\) is found by considering a small perturbation to the input \(\delta x\):
-								\[ \kappa = \frac{ \frac{f(x+\delta x) - f(x)}{f(x)} }{ \frac{\delta x}{x} }\]
+							<li>Intuition: The condition number multiplied by the relative perturbation in the input gives an upperbound on the relative error of the solution to the problem.</li>
 						</ul>
+					</section>
+					<section>
+						<h2>Condition Number (2/2)</h2>
+						<p>Formally, the condition number for the function \(f\) is found by considering a small perturbation to the input \(\delta x\):
+								\[ \kappa = \lim_{\delta \to 0}\sup_{\delta x} \frac{ \frac{f(x+\delta x) - f(x)}{f(x)} }{ \frac{\delta x}{x} }\]
+								Where typically we drop the limit and just consider \(\delta x\) to be tiny.
+						</p>
 					</section>
 					<section>
 						<h2> Matrix Condition Numbers </h2>
 						<p> The condition number of a matrix gets a special definition:
 							\[ \kappa(\mathbf{A}) = ||\mathbf{A}||||\mathbf{A}^{-1}|| \]
+						</p>
+					</section>
+					<section>
+						<h2> Finding Condition Numbers </h2>
+						<ul>
+							<li>Write down formulas for the perturbed inputs and outputs and set up the definition of condition number.</li>
+							<li>Remember the Cauchy-Schwartz inequality for matrix norms and the definition of matrix norms.</li>
+							<li>It's often useful to multiply by 1 to rewrite the expression in terms of the condition number of a matrix</li>
+						</ul>
 					</section>
 				</section>
 				<section>
