@@ -16,8 +16,373 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<section>Calculus Background</section>
+					<section>
+						<h2>Mean Value Theorem</h2>
+						<ul>
+							<li>Intuition: The derivative of \(f\) must equal the average slope somewhere.
+							<li>Formally: \(f\) is a continuous function on the closed interval \([a,b]\).  \(f\) is differentiable on the open interval \((a,b)\). Then there exists a number \(c\) on \((a,b)\) such that
+							\[f'(c) = \frac{f(b)-f(a)}{b-a}\]</li>
+					</section>
+					<section>
+						<h2>Rolle's Theorem</h2>
+					</section>
+					<section>
+						<h2>Intermediate Value Theorem</h2>
+					</section>
+				</section>
+				<section>
+					<section>Floating Point Arithmetic</section>
+					<section>
+						<h2>Vocabulary</h2>
+							<ul>
+								<li>FlOps - Floating point operations</li>
+								<li>Machine Epsilon \(\epsilon_m\) - Smallest distance between two floats</li>
+								<li>Underflow - Minimum number representable on the machine</li>
+								<li>Overflow - Largest number representable on the machine</li>
+							</ul>
+					</section>
+					<section>
+						<h2>FlOps that flop</h2>
+						<ul>
+							<li>Subtraction of two nearly identical numbers</li>
+							<li>Addition of two very different numbers</li>
+							<li>Multiplication or division that exceeds the overflow / underflow</li>
+							<li>Quotients that are not representable (e.g. repeating decimals)</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>Convergence, Stability, and Conditioning</section>
+					<section>
+						<h2>Vocabulary</h2>
+							<ul>
+								<li>Algorithm - A procedure that describes a finite # of steps to be performed in a particular order</li>
+								<li>Pseudocode - A way of describing an algorithm in concise form.  Include: In / Out / Steps.</li>
+								<li>Stable - Small \(\delta\) on the input yields small \(\delta\) on output.</li>
+							</ul>
+					</section>
+					<section>
+						<h2>Convergence</h2>
+						<ul>
+							<li> Intuition: The sequence \(x_n\) approaches some point \(x_*\)</li>
+							<li> Formally: The following limit is true:
+								\[ \lim_{n \to \infty}\left|x_n - x_*\right| = 0  \]
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Absolute Error</h2>
+						<ul>
+							<li> Intuition: The difference between the inferred value (\x_n\) of a quantity and its true value \(x\).
+								\[ \left|x_n - x \right| \]
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Relative Error</h2>
+						<ul>
+							<li> Intuition: The magnitude is the number of trustworthy digits plus one.
+								\[ \frac{\left|x_n - x \right|}{|x|} \]
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Convergence Rate: Little \(o\)</h2>
+						<ul>
+							<li> Intuition: \(f(x) = o(g(x))\) means that \(g\) is always less than \(f\)
+							</li>
+							<li> Formally: Let \(f(x)\) and \(g(x)\) be defined in some neighborhood at \(x=0\).  We say that \(f(x) = o(g(x))\) if
+								\[ \lim_{x \to 0} \left|\frac{f(x)}{g(x)}\right| = 0 \]
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Convergence Rate: Big \(O\)</h2>
+						<ul>
+							<li> Intuition: Up to multiplication, \(f(x) = O(g(x))\) means that \(g\) is always greater than \(f\)
+							<li> Formally: Let \(f(x)\) and \(g(x)\) be defined in some neighborhood at \(x=0\).  We say that \(f(x) = O(g(x))\) as \(x \to 0\) if there exists a positive constant \(M\) such that
+								\[ \left|\frac{f(x)}{g(x)}\right| \le M \]
+								for all \(x\) in a neighborhood around zero.
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Convergence Rate: Techniques</h2>
+						<ol>
+							<li>To prove \(f(x) = O(g(x))\), use the Mean Value Theorem with \(a=0\) and \(b=g(x)\) to write
+								\[ \frac{f(x) - 0}{g(x) - 0} = f'(x)\]
+							Then try to bound \(f'(x)\).
+							</li>
+						</ol>
+					</section>
+					<section>
+						<h2>Order of Convergence</h2>
+						<ul>
+							<li>Intuition: Higher orders \(p\) require fewer steps
+							</li>
+							<li>Formally, with order \(p\) and rate \(C\):
+								\[ \frac{|x_{n+1} - \alpha|}{|x_n - \alpha|^p} < C \]
+						</ul>
+					</section>
+					<section>
+						<h2>Condition Number</h2>
+						<ul>
+							<li>Intuition: Problems with a large condition number produce dramatically different answers for a slightly different input.
+							</li>
+							<li>Formally, the condition number for the function \(f\) is found by considering a small perturbation to the input \(\delta x\):
+								\[ \kappa = \frac{ \frac{f(x+\delta x) - f(x)}{f(x)} }{ \frac{\delta x}{x} }\]
+						</ul>
+					</section>
+					<section>
+						<h2> Matrix Condition Numbers </h2>
+						<p> The condition number of a matrix gets a special definition:
+							\[ \kappa(\mathbf{A}) = ||\mathbf{A}||||\mathbf{A}^{-1}|| \]
+					</section>
+				</section>
+				<section>
+					<section>Root Finding Methods Overview</section>
+					<section>
+						<h2>Bisection</h2>
+						<ul>
+							<li>Intuition: If \(f(a)\) and \(f(b)\) have opposite signs, then \(f\) crossed the \(x\) axis.  Check this condition for the first and second half of the interval.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Fixed Point Iteration</h2>
+						<ul>
+							<li>Intuition: If \(\alpha\) is a fixed point of \(g\), then we expect that the iteration \(x_{n+1} = g(x_n)\) converges to \(\alpha\).  If we have \(f(x) = x - g(x) \), then \(\alpha\) is a root of \(f\)</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Newton's Method</h2>
+						<ul>
+							<li>Intuition: The tangent line at a point \(f(x_n)\) has a root that's closer to the root of \(f\) than \(x_n\).</li>
+							<li>Possible issues:
+								<ul>
+									<li>Take off</li>
+									<li>Cycle between two iterates</li>
+									<li>Any sequence containing a point where \(f' = 0\)
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Secant Method</h2>
+						<ul>
+							<li>Intuition: Two points on \(f\) form a secant line.  The root of this line is closer to the root of \(f\) than the two points that formed the line.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Polyroot Newton's Method</h2>
+						<ul>
+							<li>Intuition: Near a multiple root, the tangent lines have slopes close to zero. Multiplying the slope by the order of the root improves convergence</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>Fixed Point Iteration</section>
+					<section>
+						<h2>Contractions</h2>
+						<ul>
+							<li>Intuition: The function maps inputs to a smaller distance apart than the inputs themselves.  It "contracts" the inputs</li>
+							<li>Formally: Suppose \(g(x)\) is real-valued and continuous on a bounded interval \([a,b]\).  Then \(g\) is a contraction on \([a,b]\) if there exists a Lipshitz constant \(L\) such that \(0 < L < 1\) and:
+								\[ |g(y)- g(x)| \le L |y-x|\]
+								For all \(x,y \in [a,b]\)
+						</ul>
+					</section>
+					<section>
+						<h2>Finding Lipshitz Constants</h2>
+					</section>
+
+					<section>
+						<h2>Contraction Mapping Theorem</h2>
+						<ul>
+							<li>Intuition: If a function tends to contract its input, fixed point iteration will converge to a fixed point.</li>
+							<li>Formally: Suppose \(g(x)\) is real-valued and bounded on the closed interval \([a,b]\) and assume \(g(x) \in [a,b]\) for all \(x \in [a,b]\).  Further, suppose \(g\) is a contraction on \([a,b]\).  Then there exists a unique fixed point \(\alpha \in [a,b]\).  Moreover, the fixed point sequence \(\{x_k\}\) converges to \(\alpha\) as \(k\to\infty\) for any \(x_0 \in [a,b]\)</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Theorem: Contractions and Derivatives</h2>
+						<ul>
+							<li>Intuition: If a function doesn't change too quickly near the fixed point, fixed point iteration will converge.</li>
+							<li>Formally: Let \(g(x) \in \mathbb{C}([a,b])\) and for all \(x \in [a,b]\), \(g(x) \in [a,b]\).  Let \(\alpha = g(\alpha) \in [a,b]\) be a fixed point and assume \(g'\) is continuous in some neighborhood of \(\alpha\) with \(|g'(\alpha)| < 1\).  Then, \(x_{k+1} = g(x_k)\) converges to \(\alpha\) as \(k \to \infty\) if \(x_o\) is close enough.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Theorem: Higher order Convergence</h2>
+						<p>Assume \(\alpha\) is a root of \(x = g(x)\), a fixed point, and that \(g\) is \(p\ge 2 \) times differentiable for all \(x\) near \(\alpha\).  Furthermore, assume \(g'(\alpha) = \cdots = g^{(p-1)}(\alpha) = 0\). Then for a close enough guess, the iteration \(x_{n+1} = g(x_n)\) will have order of convergence \(p\) and
+								\[\lim_{n\to\infty} \frac{|\alpha - x_{n+1}|}{|\alpha - x_n|} = (-1)^{(p-1)} \frac{g^{(p)}(\alpha)}{p!}\]</li>
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>Newton's Method</section>
+					<section>
+						<h2>Theorem: Newton Convergence</h2>
+						<ul>
+							<li>Intuition: Given a close enough guess, Newton's method converges when the ratio \(f''/f'\) is bounded.</li>
+							<li>Formally: Suppose that \(f,f',f''\) are continuous on the closed interval \(I_{\delta}=[\alpha-\delta,\alpha+\delta]\) for \(\delta > 0\). Assume that \(f(\alpha)=0\) and \(f'(\alpha)\ne0\).  Further, suppose there exists a positive constant \(M\) such that \(\left|\frac{f''(x)}{f'(y)}\right| < M\) for all \(x,y \in I_{\delta}\).  If \(|\alpha - x_0| \le h\) where \(h = \min \{\delta, 1/M\}\), then the newton iteration converges quadratically to \(\alpha\).</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Showing Newton Convergence</h2>
+						<p>Remember \(g(x_k)=x_{k+1}\), \(g(x_*) = x_*\), \(f(x_*)=0\)</p>
+						<ul>
+							<li>Apply the Newton convergence theorem, or any of the fixed point theorems.  Look at the ratio \(\frac{f''(x)}{f'(x)}\) and bound it.
+							<li>If \( \lim_{x_k \to \infty} = x_* \), use \(g(x_k) = x_k - \frac{f(x_k)}{f'(x_k)}\).  Substract \(x_*\) from both sides.  Collect the error terms on the left side, take absolute magnitudes and a limit.</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>Secant Method</section>
+					<section>
+						<h2>Theorem: Secant Convergence</h2>
+						<ul>
+							<li>Intuition: Secant method converges when \(f\) is "nice" and \(f'(\alpha) \ne 0), but it's slower than Newton.</li>
+							<li>Formally: Suppose that \(f \in \mathbb{C}^2(I_{\delta})\) with \(I_{\delta}=[\alpha-\delta,\alpha+\delta]\) for \(\delta > 0\). Assume that \(f(\alpha)=0\) and \(f'(\alpha)\ne0\).  Then, the iterates satisfy the following:
+								<ul>
+									<li>\(\lim_{n\to\infty} x_n = \alpha\)</li>
+									<li>\(\lim_{n\to\infty} \frac{|x_{n+1} - \alpha|}{|x_n - \alpha|^p} = \frac{f''(\alpha)}{2 f'(\alpha)} \) where \(p=\frac{1+\sqrt{5}}{2}\)
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>Linear Algebra Background</section>
+					<section>
+						<h2>Bases</h2>
+						<ul>
+							<li>\(\mathbf{v}_1,\dots,\mathbf{v}_m\) are linearly dependent if there is a set of scalars \(\alpha_1,\dots,\alpha_m\) with at least one non-zero scalar such that
+							\[\alpha_1\mathbf{v}_1 + \cdots + \alpha_m\mathbf{v}_m = 0\]
+							</li>
+							<li>\(\{\mathbf{v}_1,\dots,\mathbf{v}_m\}\) is a basis for a vector space \(V\) if for every \(\mathbf{v} \in V\) there is a unique choice of scalars \(\alpha_1,\dots,\alpha_m\) such that
+							\[\alpha_1\mathbf{v}_1 + \cdots + \alpha_m\mathbf{v}_m =\mathbf{v}\]</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Matrices</h2>
+						<p>Given a matrix \(A\)</p>
+						<ul>
+							<li>\(A\) is called symmetric if \(A^{T} = A\)</li>
+							<li>\(A\) is called Hermitian if \(A^{*} = A\)</li>
+							<li>\(A\) is called skew symmetric if \(A^{T} = -A\)</li>
+							<li>The \(rank(A)\) is the number of linearly independent columns/rows.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Singularity</h2>
+						<p>Given a matrix \(A \in \mathbb{R}^{n\times n}\), the following are equivalent</p>
+						<ul>
+							<li>A is non-singular</li>
+							<li>\(A^{-1}\) exists</li>
+							<li>The system \(Ax = b\) has a unique solution</li>
+							<li>The system \(Ax = 0\) has the trival solution</li>
+							<li>\(\det{(A)}\ne 0\)</li>
+							<li>\(Rank(A) = n\)</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Norms</h2>
+						<p>Given vectors \(x,y \in V \subset \mathbb{C}^n\), a constant \(\alpha \in \mathbb{C}\) and a real valued function \(||\cdot||\) defined on \(V\).  \(||\cdot||\) is a norm if:</p>
+						<ul>
+							<li>\(||x|| \ge 0\) and \(||x||=0\) iff \(x=0\)</li>
+							<li>\(||\alpha x|| = |\alpha| ||x||\) </li>
+							<li> \(||x+y|| \le ||x|| + ||y||\) </li>
+						</ul>
+						<p>Theorem: All norms are continuous functions of the vector components</p>
+					</section>
+					<section>
+						<h2>P-Norms</h2>
+						<p>Given vectors \(x,y \in V \subset \mathbb{C}^n\), the p-norms are
+						\[||x||_p = \left(\sum_{i=1}^n |x_i|^p \right)^{(1/p)}\]
+						Further, the p-norms \(||\cdot||_*, ||\cdot||\) satisfy:
+						\[c_1 ||x||_* \le ||x|| \le c_2 ||x||_*\;\;\; c_1,c_2 > 0\]
+						for all \(x \in \mathbb{C}\). </p>
+					</section>
+					<section>
+						<h2>Matrix Norms</h2>
+						<p>Given \(x \in V \subset \mathbb{C}^n\), and matrix  \(\mathbf{A} \in \mathbb{C}^{n\times n}\), the matrix p-norm satisfies:</p>
+						<ul>
+							<li>\( ||\mathbf{A}||_p = \sup_{x\ne0} \frac{||\mathbf{A}x||_p}{||x||_p} = \sup_{\forall x \text{ s.t. } ||x||_p = 1} ||\mathbf{A}x||_p \)</li>
+							<li>\(||\mathbf{A}\mathbf{B}|| \le ||\mathbf{A}||||\mathbf{B}||\)</li>
+							<li>\(||\mathbf{A}x||_p \le ||\mathbf{A}||||x||_p\)</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Inner Products</h2>
+						<p>Given vectors \(x,y,z \in V \subset \mathbb{C}^n\), a constant \(\alpha \in \mathbb{C}\) and a matrix \(\mathbf{A} \in \mathbb{R}^{n\times n}\), the following apply to all inner products</p>
+						<ul>
+							<li>\(\langle x , y +z \rangle = \langle x , y \rangle + \langle x, z \rangle \)  </li>
+							<li>\(\langle \alpha x , y \rangle = \alpha \langle x , y \rangle \) and \(\langle x , \alpha y \rangle = \alpha^* \langle x , y \rangle \)  </li>
+							<li>\(\langle x , y \rangle = \langle y , x \rangle^* \)</li>
+							<li>For all \(x \in V\), \(\langle x , x \rangle \ge 0\).  \(\langle x , x \rangle = 0\) iff \(x=0\)</li>
+							<li>\(| \langle x, y \rangle |^2 \le \langle x,x \rangle \langle y,y \rangle \)</li>
+							<li>\(||x+y||_2 \le ||x||_2 + ||y||_2 \)</li>
+							<li>\( \langle \mathbf{A} x , y \rangle = \langle x, \mathbf{A}^* y\rangle \)</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>Matrix Decompositions</section>
+					<section>
+						<h2>Schur Normal Form: Triangularization</h2>
+						<p>Let \(\mathbf{A} \in \mathbb{C}^{n\times n}\) and there exists a unitary matrix \(\mathbf{U}\) such that
+							\[\mathbf{T} = \mathbf{U}^* \mathbf{A} \mathbf{U} \]
+							where \(\mathbf{T}\) is an upper triangular matrix with the same eigenvalues as \(\mathbf{A}\).
+						</p>
+					</section>
+					<section>
+						<h2>Principal Axes Thm: Diagonalization</h2>
+						<p>Let \(\mathbf{A} \in \mathbb{C}^{n\times n}\) be Hermitian. Then \(\mathbf{A}\) has real eigenvalues \(\lambda_1, \lambda_2, \dots, \lambda_n\) (not necessarily distinct), and \(n\) corresponding eigenvectors \(u_1,\dots,u_n\) that form an orthonormal basis for \(\mathbb{C}^n\).  Finally, there is a unitary matrix whose columns are the eigenvectors satisfying:
+							\[ \mathbf{U}^*\mathbf{A}\mathbf{U} = \mathbf{D} = \text{diag}(\lambda_1,\dots,\lambda_n) \]
+					</section>
+					<section>
+						<h2>Singular Value Decomp</h2>
+						<p>Let \(\mathbf{A} \in \mathbb{C}^{m \times n}\).  Then there exists unitary matrices \(\mathbf{U} \in \mathbb{C}^{m \times m}\) and \(\mathbf{V} \in \mathbb{C}^{n \times n}\) such that \(\mathbf{V}^* \mathbf{A} \mathbf{U} = \mathbf{F}\)
+							with
+							\[F = \begin{pmatrix}
+										\sigma_1       &          &          &  & 0                   \\
+										               & \ddots   &					 &  &                      \\
+														       &          & \sigma_r &  &                      \\
+										0              &          &          & 0&                     \\
+										               &          &          &  & \ddots              \\
+							  		\end{pmatrix}
+							\]
+					</section>
+				</section>
+				<section>
+					<section>Eigenvalues</section>
+					<section>
+						<h2>Spectral Radius</h2>
+						<p>Let \(\mathbf{A}\) be an arbitrary square matrix. </p>
+						<ul>
+							<li> The spectrum of \(\mathbf{A}\) is the set of all eigenvalues of \(\mathbf{A}\), denoted \(\sigma(\mathbf{A})\) or \(\rho(\mathbf{A})\). </li>
+							<li> The spectral radius of \(\mathbf{A}\) is the magnitude of the largest eigenvalue: \(r_{\sigma}(\mathbf{A}) = \max_{\lambda \in \rho(\mathbf{A})} |\lambda|\) </li>
+						</ul>
+					</section>
+					<section>
+						<h2>Theorem: \(r_{\sigma}\) Upper Bound</h2>
+						<p>Let \(\mathbf{A}\) be an arbitrary square matrix. Then for any operator matrix norm, \(r_{\sigma}(\mathbf{A}) \le ||\mathbf{A}||\).  Moreover, if \(\epsilon > 0\) is given, then there is an operator \(||\cdot||_{\epsilon}\) for which \(||A||_{\epsilon} \le r_{\sigma}(\mathbf{A}) + \epsilon\)</p>
+					</section>
+					<section>
+						<h2>Theorem: Matrix Powers </h2>
+						<p>Let \(\mathbf{A}\) be an arbitrary square matrix. Then \(\mathbf{A}^m\) converges to the zero matrix as \(m \to \infty\) if and only if \(r_{\sigma}(\mathbf{A}) < 1\) </p>
+					</section>
+					<section>
+						<h2>Theorem: Neumann Series</h2>
+						<p> Let \(\mathbf{A}\) be an arbitrary square matrix.  If \(r_{\sigma}(\mathbf{A}) < 1 \) then \( (\mathbf{I} - \mathbf{A})^{-1}\) exists and it can be expressed as a convergent series
+							\[(\mathbf{I} - \mathbf{A})^{-1} = \sum_{i=0}^{\infty} \mathbf{A}^i\]
+							Conversely, if the series converges, then \(r_{\sigma}(\mathbf{A}) < 1\).</p>
+					</section>
+					<section>
+						<h2>Theorem: Norm of \((\mathbf{I} - \mathbf{A})^{-1}\) </h2>
+						<p> Let \(\mathbf{A}\) be an arbitrary square matrix.  If for some operator matrix norm \(||\mathbf{A}||< 1\), then \((\mathbf{I} - \mathbf{A})^{-1}\) exists and has the geometric series expansion.  Morever,
+							\[||(\mathbf{I} - \mathbf{A})^{-1}|| \le \frac{1}{1-||\mathbf{A}||}\]
+					</section>
+				</section>
 			</div>
 		</div>
 
@@ -25,6 +390,7 @@
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -33,7 +399,7 @@
 				hash: true,
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
 			});
 		</script>
 	</body>
