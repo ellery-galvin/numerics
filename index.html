@@ -357,34 +357,6 @@
 					</section>
 				</section>
 				<section>
-					<section>Matrix Decompositions</section>
-					<section>
-						<h2>Schur Normal Form: Triangularization</h2>
-						<p>Let \(\mathbf{A} \in \mathbb{C}^{n\times n}\) and there exists a unitary matrix \(\mathbf{U}\) such that
-							\[\mathbf{T} = \mathbf{U}^* \mathbf{A} \mathbf{U} \]
-							where \(\mathbf{T}\) is an upper triangular matrix with the same eigenvalues as \(\mathbf{A}\).
-						</p>
-					</section>
-					<section>
-						<h2>Principal Axes Thm: Diagonalization</h2>
-						<p>Let \(\mathbf{A} \in \mathbb{C}^{n\times n}\) be Hermitian. Then \(\mathbf{A}\) has real eigenvalues \(\lambda_1, \lambda_2, \dots, \lambda_n\) (not necessarily distinct), and \(n\) corresponding eigenvectors \(u_1,\dots,u_n\) that form an orthonormal basis for \(\mathbb{C}^n\).  Finally, there is a unitary matrix whose columns are the eigenvectors satisfying:
-							\[ \mathbf{U}^*\mathbf{A}\mathbf{U} = \mathbf{D} = \text{diag}(\lambda_1,\dots,\lambda_n) \]
-					</section>
-					<section>
-						<h2>Singular Value Decomp</h2>
-						<p>Let \(\mathbf{A} \in \mathbb{C}^{m \times n}\).  Then there exists unitary matrices \(\mathbf{U} \in \mathbb{C}^{m \times m}\) and \(\mathbf{V} \in \mathbb{C}^{n \times n}\) such that \(\mathbf{V}^* \mathbf{A} \mathbf{U} = \mathbf{F}\)
-							with
-							\[F = \begin{pmatrix}
-										\sigma_1       &          &          &  & 0                   \\
-										               & \ddots   &					 &  &                      \\
-														       &          & \sigma_r &  &                      \\
-										0              &          &          & 0&                     \\
-										               &          &          &  & \ddots              \\
-							  		\end{pmatrix}
-							\]
-					</section>
-				</section>
-				<section>
 					<section>Eigenvalues</section>
 					<section>
 						<h2>Spectral Radius</h2>
@@ -412,6 +384,39 @@
 						<h2>Theorem: Norm of \((\mathbf{I} - \mathbf{A})^{-1}\) </h2>
 						<p> Let \(\mathbf{A}\) be an arbitrary square matrix.  If for some operator matrix norm \(||\mathbf{A}||< 1\), then \((\mathbf{I} - \mathbf{A})^{-1}\) exists and has the geometric series expansion.  Morever,
 							\[||(\mathbf{I} - \mathbf{A})^{-1}|| \le \frac{1}{1-||\mathbf{A}||}\]
+					</section>
+				</section>
+				<section>
+					<section>Matrix Decompositions</section>
+					<section>
+						<h2>Schur Normal Form: Triangularization</h2>
+						<p>Let \(\mathbf{A} \in \mathbb{C}^{n\times n}\) and there exists a unitary matrix \(\mathbf{U}\) such that
+							\[\mathbf{T} = \mathbf{U}^* \mathbf{A} \mathbf{U} \]
+							where \(\mathbf{T}\) is an upper triangular matrix with the same eigenvalues as \(\mathbf{A}\).
+						</p>
+					</section>
+					<section>
+						<h2>Principal Axes Thm: Diagonalization</h2>
+						<p>Let \(\mathbf{A} \in \mathbb{C}^{n\times n}\) be Hermitian. Then \(\mathbf{A}\) has real eigenvalues \(\lambda_1, \lambda_2, \dots, \lambda_n\) (not necessarily distinct), and \(n\) corresponding eigenvectors \(u_1,\dots,u_n\) that form an orthonormal basis for \(\mathbb{C}^n\).  Finally, there is a unitary matrix whose columns are the eigenvectors satisfying:
+							\[ \mathbf{U}^*\mathbf{A}\mathbf{U} = \mathbf{D} = \text{diag}(\lambda_1,\dots,\lambda_n) \]
+					</section>
+					<section>
+						<h2>Singular Value Decomp</h2>
+						<p>Let \(\mathbf{A} \in \mathbb{C}^{m \times n}\).  Then there exists unitary matrices \(\mathbf{U} \in \mathbb{C}^{m \times m}\) and \(\mathbf{V} \in \mathbb{C}^{n \times n}\) such that \(\mathbf{V}^* \mathbf{A} \mathbf{U} = \mathbf{F}\)
+							with
+							\[F = \begin{pmatrix}
+										\sigma_1       &          &          &  & 0                   \\
+										               & \ddots   &					 &  &                      \\
+														       &          & \sigma_r &  &                      \\
+										0              &          &          & 0&                     \\
+										               &          &          &  & \ddots              \\
+							  		\end{pmatrix}
+							\]
+					</section>
+					<section>
+						<h2>How to find SVD</h2>
+						<p>\[A = \mathbf{V}^* F \mathbf{U}\]
+						<p>The eigenvectors of \(\mathbf{A}^T\mathbf{A}\) make up the columns of \(\mathbf{U}\) and the eigenvectors of \(\mathbf{A}\mathbf{A}^T\) make up the columns of \(\mathbf{V}\).  The positive square root of the eigenvalues of either \(\mathbf{A} \mathbf{A}^T \) or \(\mathbf{A}^T \mathbf{A}\) make up the singular values on the diagonal of \(\mathbf{F}\).</p>
 					</section>
 				</section>
 			</div>
